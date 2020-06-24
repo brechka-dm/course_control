@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>{{student.first_name}} {{student.last_name}}</h1>
+	{%for c in courses%}
+		<h2>{{c.name}}</h2>
+	{% endfor %}
+	<table class="table table-sm">
+		<tr>
+			<th>
+				№
+			</th>
+			<th>
+				Курс
+			</th>
+			<th>
+				Тема
+			</th>
+			<th>
+				Дата
+			</th>
+			<th>
+				Детали
+			</th>
+			<th>
+				Счет
+			</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td colspan ="5">
+				<a href="https://calendar.google.com/calendar/r">
+					<span class="fas fa-calendar-check">
+						Запланировать занятие
+					</span>	
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td colspan ="5">
+				<a href="{%url 'addLesson' sid=student.id%}">
+				<span class="fas fa-plus-square">
+					Добавить занятие
+				</span>
+				</a>
+			</td>	
+		</tr>
+		<form method="POST" class="post-form">{% csrf_token %}
+		{%for l in nbl%}
+		<tr>
+			<td>
+				{{l.number}}
+			</td>
+			<td>
+				{{l.course.name}}
+			</td>
+			<td>
+				{{l.theme}}
+			</td>
+			<td>
+				{{l.date}}
+			</td>
+			<td>
+				<button class="btn btn-primary btn-sm" type="submit" name ="lessonDetail+{{l.id}}^"}>
+				<span class="fas fa-address-card">
+					Детали
+				</span>
+				</button>
+			</td>
+			<td>
+				<button class="btn btn-primary btn-sm" type="submit" name ="bill+{{l.id}}"}>
+					<span class="fas fa-money-bill-alt">
+						Выставить
+					</span>
+				</button>
+			</td>
+		</tr>
+		{%endfor%}
+		{%for b in bills%}
+		<tr>
+			<td>
+				{{b.lesson.number}}
+			</td>
+			<td>
+				{{b.lesson.course.name}}
+			</td>
+			<td>
+				{{b.lesson.theme}}
+			</td>
+			<td>
+				{{b.lesson.date}}
+			</td>
+			<td>
+				<button class="btn btn-primary btn-sm" type="submit" name ="lessonDetail+{{b.lesson.id}}^"}>
+					<span class="fas fa-address-card">
+						Детали
+					</span>
+				</button>
+			</td>
+			<td>
+				{%if b.status%}
+					Оплачено
+				{%else %}
+					<button class="btn btn-primary btn-sm" type="submit" name ="pay+{{b.id}}^"}>
+						<span class="fas fa-money-bill-alt">
+							#{{b.agent.id}}.{{b.lesson.id}}#
+						</span>
+					</button>
+				{%endif%}
+			</td>
+		</tr>
+		{% endfor %}
+		</form>
+	</table>
+{% endblock %}

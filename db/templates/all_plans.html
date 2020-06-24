@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+<table class="table table-sm">
+	<tr>
+		<th>Курс</th>
+		<th>Темы</th>
+	</tr>
+	{%for cp in course_plans%}
+	<tr class="row-sm-1">
+		<td>{{cp.0}}</td>
+		<td class="col-md-1">
+		{%for i in cp.1%}
+			<a href="{%url 'courseItem' cid=cp.0.id iid=i.id%}">{{i}}</a><br>
+		{%endfor%}	
+		<button class="btn btn-primary btn-sm" type="submit" name="addItem" value="{{cp.0.id}}">
+			<span class="fas fa-plus-square">
+
+			</span>
+		</button>
+		</td>
+	<tr>
+	{%endfor%}
+</table>
+</form>
+{% endblock %}

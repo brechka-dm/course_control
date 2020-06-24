@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+<table>
+	<tr>
+		<td>{{form.course.label}}</td>
+		<td>{{form.course}}</td>
+	</tr>
+	<tr>
+		<td>{{form.number.label}}</td>
+		<td>{{form.number}}</td>
+	</tr>
+	<tr>
+		<td>{{form.caption.label}}</td>
+		<td>{{form.caption}}</td>
+	</tr>
+	<tr>
+		<td>{{form.description.label}}</td>
+		<td>{{form.description}}</td>
+	</tr>
+	<tr>
+		<td>
+			<button type="submit" name="addItem">Сохранить</button>
+		</td>
+		<td>
+			<button type="submit" name="delItem">Удалить</button>
+		</td>
+	</tr>
+</table>
+<form>
+
+{% endblock %}

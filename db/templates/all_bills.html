@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+<table>
+	<tr>
+		<td>Ученик</td>
+		<td>Дата занятия</td>
+		<td>Статус/Номер</td>
+	</tr>
+	{%for b in bills%}
+	<tr>
+		<td>{{b.agent}}</td>
+		<td>{{b.lesson.date}}</td>
+		{%if b.status%}
+			<td>Оплачено</td>
+		{%else%}
+			<td>
+				<button type="submit" name ="pay" value="{{b.id}}"}>#{{b.agent.id}}.{{b.lesson.id}}#</button>
+			</td>
+		{%endif%}
+	</tr>
+	{%endfor%}
+</table>
+<form>
+{% endblock %}

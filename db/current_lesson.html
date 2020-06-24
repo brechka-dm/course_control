@@ -1,0 +1,43 @@
+{% block content %}
+	<h1>{{student.first_name}} {{student.last_name}}</h1>
+	<h2>Текущее занятие</h2>
+	<form  method="POST" class="post-form">{% csrf_token %}
+		<table>
+			<tr>
+				<td>Курс: </td>
+				<td>{{form.course}}</td>
+				<td></td>
+				<td>План:</td>
+			</tr>
+			<tr>
+				<td>Тема: </td>
+				<td>{{form.theme}}</td>
+				{%if plan%}
+				<td>
+					<form method="POST"> {% csrf_token %}
+					<button type="submit" name ="additem"><<</button></td>
+					</form>
+				<td>
+					<select name="selected_theme">
+					{%for p in plan%}
+						<option> {{p.item.caption}} | {{p.item.id}}</option>
+					{% endfor %}
+					</select>
+				</td>
+				{%endif%}
+			</tr>
+			<tr>
+				<td>Дата: </td>
+				<td>{{form.date}}</td>
+			</tr>
+			<tr>
+				<td>Комментарий: </td>
+				<td>{{form.decription}}</td>
+			</tr>
+			<tr>
+				<td><button type="submit" name ="addlesson">Добавить</button></td>
+			</tr>
+		</table>
+        
+    </form>
+{% endblock %}

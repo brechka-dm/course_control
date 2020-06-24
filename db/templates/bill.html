@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+	<table >
+	<tr>
+		<th scope="row"> {{f.agent.label}} </th>
+		<td >{{f.agent}}</td>
+	</tr>
+	<tr>
+		<th scope="row">Занятие</th>
+		<td>{{f.lesson}}</td>
+	</tr>
+	<tr>
+		<th scope="row">{{f.ammount.label}}</th>
+		<td>{{f.ammount}}</td>
+	</tr>
+	<tr>
+		<th scope="row">{{f.billingDate.label}}</th>
+		<td>{{f.billingDate}}</td>
+	</tr>
+	<tr>
+		<th scope="row">{{f.receiptDate.label}}</th>
+		<td>{{f.receiptDate}}</td>
+	</tr>
+	<tr>
+		<th scope="row">{{f.status.label}}</th>
+		<td>{{f.status}}</td>
+	</tr>
+	<tr>
+		<th scope="row">{{f.text.label}}</th>
+		<td>{{f.text}}</td>
+	</tr>
+	<td colspan="2"><button class="btn btn-primary" type="submit" name ="make"}>Сформировать</button></td>
+	</table>
+	<p><b>Контакты:</b></p>
+	<table >
+		{%for c in contacts%}
+		<tr>
+			<th scope="row">{{c.type}}:</th>
+			<td>{{c.contact}}</td>
+			<td><button type="submit" name ="send+{{c.id}}^"}>Отправить</button></td>
+		</tr>
+		{%endfor%}
+	</table>
+    <button class="btn btn-primary" type="submit" name ="close"}>Закрыть</button></td>
+</form>
+{% endblock %}

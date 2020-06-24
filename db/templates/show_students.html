@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Курс: {{course}}</h1>
+	<h2>Ученики:</h2>
+	<form method="POST" class="post-form">{% csrf_token %}
+	<table class="table table-sm">
+		<td  class="col-sm-1">
+			<a href="{%url 'addStudent' sid=0%}">
+				<span class="fas fa-user-plus">
+						Добавить ученика
+				</span>
+			</a>
+		</td>
+		{%for s in students%}
+			<tr>
+				<td><a href="{%url 'showStudentProgress' sid=s.id%}">{{s}}</td>
+				<!--
+				<td >
+					<button type="submit" name ="studentDetail+{{s.id}}"}>Детали</button>
+				</td>
+				<td>
+					<button type="submit" name ="studentPlan+{{s.id}}"}>План</button>
+				</td>
+				/-->
+			</tr>
+			{% endfor %}
+	</table>		
+	</form>
+{% endblock %}

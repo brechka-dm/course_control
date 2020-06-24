@@ -1,0 +1,27 @@
+{% block content %}
+	<h1>{{student.first_name}} {{student.last_name}}</h1>
+	<h2>Текущее занятие</h2>
+	<form>
+	<table>
+		<tr>
+			<td>Курс: </td>
+			<td><input type="text" name="ccourse" value="Курс"></td>
+		</tr>
+		<tr>
+			<td>Тема: </td>
+			<td><input type="text" name="ctheme" value="Тема"></td>
+		</tr>
+		<tr>
+			<td>Дата: </td>
+			<td><input type="text" name="cdate" value="Дата"></td>
+		</tr>
+		<tr>
+			<td>Комментарий: </td>
+			<td><input type="text" name="cdescr" value="Комментарий"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Добавить"></td>
+		</td>
+	</table>
+	</form>
+{% endblock %}

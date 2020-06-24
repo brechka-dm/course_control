@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+	<form method="POST" class="post-form">{% csrf_token %}
+		<table>
+			<tr>
+				<th scope="row"> Фамилия: </th>
+				<td>{{form.last_name}}</td>
+			</tr>
+			<tr>
+				<th scope="row"> Имя: </th>
+				<td>{{form.first_name}}</td>
+			</tr>
+			<tr>
+				<th scope="row"> Отчество: </th>
+				<td>{{form.middle_name}}</td>
+			</tr>
+			<tr>
+				<th scope="row"> Описание: </th>
+				<td>{{form.description}}</td>
+			</tr>
+			{%if all_courses%}
+			<tr>
+				<th scope="row"> Записан на курсы: </th>
+				<td>
+					<select class="lesson-field" multiple size=3>
+					{%for c in courses%}
+						<option> {{c.course}}</option>
+					{% endfor %}
+					</select>
+				</td>
+				<td><button button class="btn btn-primary" type="submit" name="addCourse"><<</button></td>
+				<th scope="row"> Все курсы: </th>
+				<td>
+					<select class="lesson-field" multiple size=3 name="selected_course" >
+					{%for c in all_courses%}
+						<option value="{{c.id}}"> {{c.name}}</option>
+					{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"> Контакты: </th>
+			</tr>
+			<tr>
+				<td>
+					<select name="new_contact_type">
+					{%for t in contact_types%}
+						<option value="{{t.id}}"> {{t.name}}</option>
+					{%endfor%}
+					</select>
+				</td>
+				<td><input class="lesson-field" type="text" name="new_contact"></td>
+				<td>
+					<button  class="btn btn-primary" type="submit" name="addContact">Добавить</button>
+				</td>
+			</tr>
+			{%for cn in contacts%}
+			<tr>
+				<td>{{cn.type}}</td>
+				<td>{{cn.contact}}</td>
+				<td>
+					<button class="btn btn-primary" type="submit" name="delContact" value="{{cn.id}}">Удалить</button>
+				</td>
+			{% endfor %}
+			</tr>
+			{%endif%}
+			{%if not all_courses%}
+			<tr>
+				<td><button type="submit" name="save">Сохранить</button></td>
+			</tr>
+			{%endif%}
+		</table>
+        
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Курсы</h1>
+		<form method="POST" class="post-form">{% csrf_token %}
+		<table class="table th-sm">
+			<tr>
+				<td class="col-sm-1">
+					<a href="{%url 'addCourse' 0%}">
+					<span class="fas fa-plus-square">
+						Добавить курс
+					<span>
+					</a>
+				</td>
+				<td class="col-sm-1"></td>
+			</tr>
+			{%for c in courses%}
+			<tr>
+				<td><a href="{%url 'showStudents' cid=c.id%}">{{c}}</td>
+				<td>
+					<button type="submit" class="btn btn-primary" name ="editCourse+{{c.id}}^"}>
+					<span class="fas fa-edit">
+					Редактировать
+					</span>
+					
+					</button>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		</form>
+{% endblock %}

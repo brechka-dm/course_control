@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+	<table >
+		<tr>
+			<th scope="row">{{f.student.label}}</th>
+			<td >{{f.student}}</td>
+		</tr>
+		<tr>
+			<th scope="row">{{f.number.label}}  </th>
+			<td>{{f.number}}</td>
+		</tr>
+		<tr>
+			<th scope="row">{{f.course.label}}</th>
+			<td>{{f.course}}</td>
+		</tr>
+		<tr>
+			<th scope="row">{{f.theme.label}}</th>
+			<td>{{f.theme}}</td>
+			{%if plan%}
+				<td>
+					<form method="POST"> {% csrf_token %}
+					<button class="btn btn-primary btn-sm" type="submit" name ="additem"><<</button></td>
+					</form>
+				<td>
+					<select name="selected_theme" class="lesson-field">
+					{%for p in plan%}
+						<option> {{p.item.caption}} | {{p.item.id}}</option>
+					{% endfor %}
+					</select>
+				</td>
+			{%else%}
+				<td>
+					<button disabled class="btn btn-primary btn-sm" type="submit" name ="additem"><<</button>
+				</td>
+				<td>
+					<select disabled name="selected_theme" class="lesson-field"></select>
+				</td>
+			{%endif%}
+		</tr>
+		<tr>
+			<th scope="row">{{f.date.label}}</th>
+			<td>{{f.date}}</td>
+		</tr>
+		<tr>
+			<th scope="row">{{f.decription.label}}</th>
+			<td colspan="3">{{f.decription}}</td>
+		</tr>
+	</table>
+<button type="submit" name ="close" class="btn btn-primary"}>Закрыть</button></td>
+</form>
+{% endblock %}

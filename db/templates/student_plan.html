@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+<table>
+	<tr>
+		<td>Ученик:</td>
+		<td>
+			{{student}}
+		</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<td>План:</td>
+	</tr>
+	<tr>
+	
+	<td>
+	{%for pt in plan%}
+		{{pt.number}}.{{pt.item}}
+		<button type="submit" name="delItem" value="{{pt.id}}">-</button><br>
+	{%endfor%}
+	<td>
+	<td>
+		№:<br>
+		<input type="text" size="1"></input><br>
+		<button type="submit" name="addItem"><<</button><br>
+	</td>
+	<td>
+		<select size="40" multiple name="items_to_add">
+		{%for i in all_items%}
+			<option value="{{i.id}}">{{i.course}}.{{i}}</option>
+		{%endfor%}
+		</select>
+	<td>
+	</tr>
+	<tr>
+		<td>
+			<button type="submit" name="save">Закрыть</button>
+		</td>
+	</tr>
+</table>
+<form>
+{% endblock %}

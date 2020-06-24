@@ -1,0 +1,14 @@
+.edit_button{
+	background-color: #4CAF50;
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/></svg>");
+}
+td.col-1, th.col-1 {
+	width: 8.33333%;
+	height: 8%;
+}
+.lesson-field{
+	width: 300px;
+}
+.lesson-discription{
+	width: 640px;
+}
