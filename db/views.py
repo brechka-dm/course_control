@@ -11,6 +11,8 @@ def billsort(bill):
 	return int(bill.lesson.number)
 def studentitemsort(studentitem):
 	return int(studentitem.number)
+def humanindexsort(human):
+	return human.id
 # Create your views here.
 def start(request):
 	courses=Course.objects.all()
@@ -270,6 +272,8 @@ def showAllStudents(request):
 			return HttpResponseRedirect(reverse('addStudent',args=(sid,)))
 		if 'plan' in request.POST:
 			return HttpResponseRedirect(reverse('studentPlan',args=(request.POST['plan'],)))
+	else:
+		stdl.sort(key=humanindexsort,reverse=True)
 	return render(
         request,
         'all_students.html',
@@ -367,7 +371,9 @@ def studentPlan(request, sid):
 	return render(request, 'student_plan.html',{'student':s, 'plan':sp, 'all_items':allp})
 	
 def allBills(request):
-	bills=Bill.objects.all()
+	bills=Bill.objects.all().order_by('-id')
+	#bills=[]
+	#bills.append(Bill.objects.all())#.order_by('id'))
 	if (request.method== 'POST'):
 		if 'pay' in request.POST:
 			bill=Bill.objects.get(id=request.POST['pay'])
@@ -375,5 +381,8 @@ def allBills(request):
 			bill.status=True
 			bill.save()
 			return HttpResponseRedirect(reverse('allBills'))
+	#else:
+	#	list(bills)
+	#	bills.sort(key=billsort,reverse=True)
 	
 	return render(request, 'all_bills.html',{'bills':bills})
